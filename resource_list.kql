@@ -52,12 +52,28 @@ type contains "microsoft.compute/virtualmachine" and (tostring(properties.hardwa
 ,type startswith "microsoft.cdn" and parse_json(sku).name =~"Standard_Microsoft", 619
 ,type =~ "microsoft.appplatform/spring" and parse_json(sku).tier  =~ "StandardGen2", 623
 ,type contains "microsoft.documentdb/databaseaccounts" and properties['minimalTlsVersion'] in ("Tls11","Tls"), 703
+,type == "microsoft.network/applicationgateways" and 
+    (properties['sslPolicy']['minProtocolVersion'] != "TLSv1_2" and 
+    ​properties['sslPolicy']['minProtocolVersion'] != "TLSv1_3"​ and 
+    properties['sslPolicy']['policyName'] !contains "2022" and 
+    properties['sslPolicy']['policyName'] !contains "401S" and 
+    properties['defaultPredefinedSslPolicy'] !contains "2022"),714
+,type == "microsoft.servicebus/namespaces" and isnotempty(tostring(parse_json(properties).minimumTlsVersion)) and tostring(parse_json(properties).minimumTlsVersion) in ("1.0","1.1"),43502,
+type == 'microsoft.datalakeanalytics/accounts' and not(location in ('westcentralus','westus2','westus3')) and properties contains 'defaultDataLakeStoreAccount', 18,
+type contains 'Microsoft.TimeSeriesInsights',31,
+type =~ "microsoft.insights/workbooks" and properties.category =~ "tsg",143,
+type =~ "Microsoft.DataBoxEdge/dataBoxEdgeDevices" and set_has_element(todynamic(properties.configuredRoleTypes), "IOT"),153,
+type == "microsoft.insights/components" and isempty(properties.WorkspaceResourceId) ,181,
+type == "microsoft.datalakestore/accounts" and not(location in ('westcentralus','westus2')),182,
+type =~ "microsoft.migrate/projects",187,
+type =~ "microsoft.insights/alertrules",200,
+type contains "microsoft.media/mediaservices",394
 ,-9999)
 | where ServiceID >0
 | project ServiceID , subscriptionId, type, resourceGroup, location, id, tags = tostring(tags)
 | union
 ( resources
-| where (type =~ "microsoft.synapse/workspaces/bigdatapools" and todouble(properties.sparkVersion) in (3.2, 3.3)) or (type contains "microsoft.hdinsight/clusters") or (type == 'microsoft.network/loadbalancers' and sku.name =~ "Standard")
+| where (type =~ "microsoft.synapse/workspaces/bigdatapools" and todouble(properties.sparkVersion) in (2.4,3.1,3.2, 3.3)) or (type contains "microsoft.hdinsight/clusters") or (type == 'microsoft.network/loadbalancers' and sku.name =~ "Standard")
 | extend workspaceId = tostring(split(id,'/')[8]), sparkVersion = todouble(properties.sparkVersion)
 | join kind = leftouter (	 
             Resources
@@ -72,6 +88,8 @@ type contains "microsoft.compute/virtualmachine" and (tostring(properties.hardwa
 | extend vmSize = properties_computeProfile_roles.hardwareProfile.vmSize
 | project subscriptionId, ServiceID = 
         case (
+            ['type'] =~ "microsoft.synapse/workspaces/bigdatapools" and sparkVersion == 2.4, 328, 
+            ['type'] =~ "microsoft.synapse/workspaces/bigdatapools" and sparkVersion == 3.1, 325, 
             ['type'] =~ "microsoft.synapse/workspaces/bigdatapools" and sparkVersion == 3.2, 583, 
             ['type'] =~ "microsoft.synapse/workspaces/bigdatapools" and sparkVersion == 3.3, 643, 
             ['type'] =~ "microsoft.hdinsight/clusters" and vmSize in~ ("standard_a0","standard_a1","standard_a2","standard_a3","standard_a4","standard_a5","standard_a6","standard_a7"), 564,
@@ -85,16 +103,17 @@ type contains "microsoft.compute/virtualmachine" and (tostring(properties.hardwa
 (
     AdvisorResources
 | where type =~'microsoft.advisor/recommendations'
-| where properties.shortDescription contains 'Cloud service caches are being retired' or properties.shortDescription contains 'Move to Azure Update Manager as Automation Update Management will be deprecated'
+| where properties.shortDescription contains 'Cloud service caches are being retired' or properties.shortDescription contains 'Move to Azure Update Manager as Automation Update Management will be deprecated' or properties.shortDescription contains 'Upgrade NSG flow logs to VNet flow logs'
 | project id=tolower(tostring(properties.resourceMetadata.resourceId))
 | join kind = inner
     (
         resources
 | where type in~ ('microsoft.cache/redis','microsoft.automation/automationAccounts','MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS')
-| extend ServiceID = case (type contains 'microsoft.cache/redis', 124 , type contains 'microsoft.automation/automationAccounts', 245, -9999)
-| project ServiceID, subscriptionId, resourceGroup, location, type,  id=tolower(id), tags = tostring(tags)
-    ) on id
-| project ServiceID, subscriptionId, type, resourceGroup, location, id, tags  
+| extend ServiceID = case (type contains 'microsoft.cache/redis', 124 , type contains 'microsoft.automation/automationAccounts', 245, type contains 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS', 524, -9999)
+| extend joiningId = tolower(case (type contains 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS', tostring(properties.targetResourceId), id))
+| project ServiceID, subscriptionId, location, type,  id=tolower(id), tags = tostring(tags), joiningId,resourceGroup
+    ) on $left.id == $right.joiningId
+| project ServiceID, subscriptionId, type, resourceGroup, location, id = id1, tags  
 )
 | join kind = leftouter ( 
     resourcecontainers 
@@ -104,4 +123,4 @@ type contains "microsoft.compute/virtualmachine" and (tostring(properties.hardwa
     ) on $left.subscriptionId == $right.subscriptionIdOnly
 | where ('*' in (dynamic(['*'])) or resourceGroup in (dynamic(['*']))) 
 | where ('*' in (dynamic(['*'])) or location in (dynamic(['*'])))
-| where array_length(dynamic([583])) == 0 or ServiceID in (dynamic([583])) 
+| where array_length(dynamic([])) == 0 or ServiceID in (dynamic([])) 

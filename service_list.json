@@ -594,6 +594,14 @@
             "Availability under Impacted Services": "Yes"
         },
         {
+            "Id": 910,
+            "ServiceName": "Azure Database for MySQL Flexible Server",
+            "RetiringFeature": "Support for TLS 1.0 and 1.1",
+            "RetirementDate": "2025-08-31",
+            "Link": "https://learn.microsoft.com/azure/mysql/flexible-server/how-to-connect-tls-ssl",
+            "Availability under Impacted Services": ""
+        },
+        {
             "Id": 459,
             "ServiceName": "App Service",
             "RetiringFeature": "PHP 8.1",

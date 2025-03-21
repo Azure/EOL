@@ -14,7 +14,7 @@ Service health can be used to obtain a list of service retirements. The retireme
 ServiceHealthResources
 | where type =~ 'Microsoft.ResourceHealth/events'
 | extend eventType = properties.EventType, status = properties.Status, description = properties.Title, trackingId = properties.TrackingId, summary = properties.Summary, priority = properties.Priority, impactStartTime = properties.ImpactStartTime, impactMitigationTime = todatetime(tolong(properties.ImpactMitigationTime))
-| where eventType == 'HealthAdvisory’
+| where eventType == 'HealthAdvisory'
 ```
 
 ## JSON File Overview

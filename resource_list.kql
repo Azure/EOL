@@ -94,7 +94,7 @@ type contains "microsoft.web/sites" and tostring(properties.siteProperties.prope
         tostring(properties.siteProperties.properties) contains "NODE|18-lts", 531,
 		-9999)
 ,-9999)
-| where ServiceID >0
+| where toint(ServiceID) >0
 | project ServiceID , subscriptionId, type, resourceGroup, location, id, tags = tostring(tags)
 | union
 ( resources

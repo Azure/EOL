@@ -453,7 +453,7 @@
             "Id": 706,
             "ServiceName": "Azure Automation",
             "RetiringFeature": "Support for TLS 1.0 and 1.1",
-            "RetirementDate": "2024-10-31",
+            "RetirementDate": "2025-03-31",
             "Link": "https://learn.microsoft.com/azure/automation/automation-managing-data#upgrade-tls-protocol-for-hybrid-workers-and-webhook-calls",
             "Availability under Impacted Services": ""
         },
@@ -781,7 +781,7 @@
             "Id": 267,
             "ServiceName": "Azure SQL",
             "RetiringFeature": "Connector v1 operations",
-            "RetirementDate": "2025-03-31",
+            "RetirementDate": "2025-06-30",
             "Link": "https://azure.microsoft.com/updates/sql-server-connector-s-v1-actions-and-triggers-will-be-retired-on-31-march-2024-transition-to-sql-server-connector-s-v2-actio/",
             "Availability under Impacted Services": ""
         },
@@ -829,7 +829,7 @@
             "Id": 543,
             "ServiceName": "API Management",
             "RetiringFeature": "Direct Management API",
-            "RetirementDate": "2025-03-31",
+            "RetirementDate": "2025-03-15",
             "Link": "https://azure.microsoft.com/updates/begin-using-azure-monitor-based-dashboards-in-azure-api-management-before-the-builtin-analytics-dashboards-are-retired-on-15/",
             "Availability under Impacted Services": ""
         },
@@ -1863,7 +1863,7 @@
             "RetiringFeature": "Best Practices",
             "RetirementDate": "2027-09-30",
             "Link": "https://azure.microsoft.com/updates/v2/Azure-Automanage-Best-Practices-Retirement-Migrate-to-Azure-Policy",
-            "Availability under Impacted Services": ""
+            "Availability under Impacted Services": "Yes"
         },
         {
             "Id": 678,
@@ -1879,6 +1879,166 @@
             "RetiringFeature": "Data Sync",
             "RetirementDate": "2027-09-30",
             "Link": "https://azure.microsoft.com/updates/v2/SQL-Data-Sync-Retirement",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 604,
+            "ServiceName": "Microsoft Entra Id",
+            "RetiringFeature": "VPN Gateway with Third-party App",
+            "RetirementDate": "2026-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485535",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 850,
+            "ServiceName": "Windows Virtual Machines",
+            "RetiringFeature": "Desired State Configuration extension",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485828",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 570,
+            "ServiceName": "App Service",
+            "RetiringFeature": "Support for Node 20 LTS",
+            "RetirementDate": "2026-04-30",
+            "Link": "https://azure.microsoft.com/updates/?id=485072",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 657,
+            "ServiceName": "Azure Kubernetes Service",
+            "RetiringFeature": "Kubenet",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485172",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 173,
+            "ServiceName": "Azure App Service",
+            "RetiringFeature": "Docker Compose",
+            "RetirementDate": "2027-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485167",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 950,
+            "ServiceName": "Cloud Services",
+            "RetiringFeature": "Extended Support",
+            "RetirementDate": "2027-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=486344",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 600,
+            "ServiceName": "Azure Container Registry",
+            "RetiringFeature": "Support for Docker Content Trust",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485241",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 810,
+            "ServiceName": "Azure Spring Apps",
+            "RetiringFeature": "Entire service",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485865",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 644,
+            "ServiceName": "Azure Synapse Analytics",
+            "RetiringFeature": "Data Explorer (Kusto) pools",
+            "RetirementDate": "2025-10-07",
+            "Link": "https://azure.microsoft.com/updates/?id=484968",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 494,
+            "ServiceName": "Virtual Machines",
+            "RetiringFeature": "D, Ds, Dv2, Dsv2 and Ls series",
+            "RetirementDate": "2028-05-01",
+            "Link": "https://azure.microsoft.com/updates/?id=485569",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 43513,
+            "ServiceName": "Entra Domain Services",
+            "RetiringFeature": "Support for TLS 1.0/1.1",
+            "RetirementDate": "2025-08-31",
+            "Link": "https://azure.microsoft.com/updates/?id=487247",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 662,
+            "ServiceName": "Azure Maps",
+            "RetiringFeature": "Route v1 APIs",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485819",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 676,
+            "ServiceName": "Azure Kubernetes Service",
+            "RetiringFeature": "Support for Ubuntu 18.04",
+            "RetirementDate": "2025-06-17",
+            "Link": "https://azure.microsoft.com/updates/?id=485790",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 420,
+            "ServiceName": "Azure Storage",
+            "RetiringFeature": "Data Movement Library",
+            "RetirementDate": "2026-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485106",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 667,
+            "ServiceName": "Azure Maps",
+            "RetiringFeature": "Traffic v1 APIs",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485810",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 268,
+            "ServiceName": "Azure SQL Database",
+            "RetiringFeature": "FsV2 Database",
+            "RetirementDate": "2026-10-01",
+            "Link": "https://azure.microsoft.com/updates/?id=485030",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 677,
+            "ServiceName": "Azure Kubernetes Service",
+            "RetiringFeature": "Support for Ubuntu 20.04",
+            "RetirementDate": "2027-03-17",
+            "Link": "https://azure.microsoft.com/updates/?id=485795",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 43501,
+            "ServiceName": "API Management",
+            "RetiringFeature": "TLS 1.0/1.1 Retirement",
+            "RetirementDate": "2024-10-31",
+            "Link": "https://azure.microsoft.com/updates/azure-support-tls-will-end-by-31-october-2024-2/",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 679,
+            "ServiceName": "Azure Kubernetes Service enabled by Azure Arc",
+            "RetiringFeature": "Windows Server 2019 and Windows Server 2023",
+            "RetirementDate": "2028-03-27",
+            "Link": "https://azure.microsoft.com/updates/?id=485893",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 319,
+            "ServiceName": "Log Analytics",
+            "RetiringFeature": "Batch API",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=486080",
             "Availability under Impacted Services": ""
         },
         {
@@ -2677,7 +2837,7 @@
             "ServiceName": "Azure Time Series Insights",
             "RetiringFeature": "Entire service",
             "RetirementDate": "2024-07-07",
-            "Link": "https://azure.microsoft.com/updates/we-re-retiring-azure-time-series-insights-on-7-july-2024-transition-to-azure-data-explorer/#:~:text=We%E2%80%99re%20retiring%20Azure%20Time%20Series%20Insights%20on%207,answers%20from%20community%20experts%20in%20Microsoft%20Q%26A.%20?msockid=01047d944d226853006f69314c0f69c7"
+            "Link": "https://azure.microsoft.com/updates/we-re-retiring-azure-time-series-insights-on-7-july-2024-transition-to-azure-data-explorer/"
         },
         {
             "Id": "143",
@@ -2825,6 +2985,97 @@
             "RetiringFeature": "Best Practices",
             "RetirementDate": "2027-09-30",
             "Link": "https://azure.microsoft.com/updates/v2/Azure-Automanage-Best-Practices-Retirement-Migrate-to-Azure-Policy"
+        },
+        {
+            "Id": 43501,
+            "ServiceName": "API Management",
+            "RetiringFeature": "TLS 1.0/1.1 Retirement",
+            "RetirementDate": "2024-10-31",
+            "Link": "https://azure.microsoft.com/updates/azure-support-tls-will-end-by-31-october-2024-2/"
+        },
+        {
+            "Id": 570,
+            "ServiceName": "App Service",
+            "RetiringFeature": "Support for Node 20 LTS",
+            "RetirementDate": "2026-04-30",
+            "Link": "https://azure.microsoft.com/updates/?id=485072"
+        },
+        {
+            "Id": 173,
+            "ServiceName": "Azure App Service",
+            "RetiringFeature": "Docker Compose",
+            "RetirementDate": "2027-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485167"
+        },
+        {
+            "Id": 600,
+            "ServiceName": "Azure Container Registry",
+            "RetiringFeature": "Support for Docker Content Trust",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485241"
+        },
+        {
+            "Id": 657,
+            "ServiceName": "Azure Kubernetes Service",
+            "RetiringFeature": "Kubenet",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485172"
+        },
+        {
+            "Id": 679,
+            "ServiceName": "Azure Kubernetes Service enabled by Azure Arc",
+            "RetiringFeature": "Windows Server 2019 and Windows Server 2023",
+            "RetirementDate": "2028-03-27",
+            "Link": "https://azure.microsoft.com/updates/?id=485893"
+        },
+        {
+            "Id": 810,
+            "ServiceName": "Azure Spring Apps",
+            "RetiringFeature": "Entire service",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485865"
+        },
+        {
+            "Id": 644,
+            "ServiceName": "Azure Synapse Analytics",
+            "RetiringFeature": "Data Explorer (Kusto) pools",
+            "RetirementDate": "2025-10-07",
+            "Link": "https://azure.microsoft.com/updates/?id=484968"
+        },
+        {
+            "Id": 950,
+            "ServiceName": "Cloud Services",
+            "RetiringFeature": "Extended Support",
+            "RetirementDate": "2027-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=486344"
+        },
+        {
+            "Id": 43513,
+            "ServiceName": "Entra Domain Services",
+            "RetiringFeature": "Support for TLS 1.0/1.1",
+            "RetirementDate": "2025-08-31",
+            "Link": "https://azure.microsoft.com/updates/?id=487247"
+        },
+        {
+            "Id": 604,
+            "ServiceName": "Microsoft Entra Id",
+            "RetiringFeature": "VPN Gateway with Third-party App",
+            "RetirementDate": "2026-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485535"
+        },
+        {
+            "Id": 494,
+            "ServiceName": "Virtual Machines",
+            "RetiringFeature": "D, Ds, Dv2, Dsv2 and Ls series",
+            "RetirementDate": "2028-05-01",
+            "Link": "https://azure.microsoft.com/updates/?id=485569"
+        },
+        {
+            "Id": 850,
+            "ServiceName": "Windows Virtual Machines",
+            "RetiringFeature": "Desired State Configuration extension",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485828"
         }
     ],
     "transformers": null

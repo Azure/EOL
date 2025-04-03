@@ -1,6 +1,16 @@
 resources
 | extend ServiceID= case(
 type =~ "microsoft.web/hostingenvironments" and kind in~ ('ASEV1','ASEV2'),13
+,type == "microsoft.network/virtualnetworkgateways" and properties['vpnClientConfiguration']['vpnAuthenticationTypes'] contains 'AAD' and  properties['vpnClientConfiguration']['aadAudience'] == '41b23e61-6c1e-4545-b367-cd054e0ed4b4', 604
+,type == "microsoft.containerservice/managedclusters" and properties.networkProfile.networkPlugin == 'kubenet', 657
+,type == "microsoft.compute/cloudservices", 950
+,type == "microsoft.containerregistry/registries" and properties['policies']['trustPolicy']['status'] == 'enabled', 600
+,type == "microsoft.appplatform/spring", 810
+,type =~ "microsoft.synapse/workspaces/kustopools", 644
+,type == "microsoft.compute/virtualmachines" and  properties['hardwareProfile']['vmSize'] in ('Standard_L4s', 'Standard_L8s', 'Standard_L16s','Standard_L32s','Standard_DS1_v2','Standard_DS3_v2','Standard_DS14_v2','Standard_DS2_v2','Standard_DS13_v2','Standard_D1_v2','Standard_DS4_v2','Standard_D2_v2','Standard_DS5_v2','Standard_DS11_v2','Standard_D3_v2','Standard_D4_v2','Standard_D14_v2','Standard_DS12_v2','Standard_D11_v2','Standard_DS15_v2','Standard_D12_v2','Standard_D13_v2','Standard_DS12-2_v2','Standard_D5_v2','Standard_DS1','Standard_D15_v2','Standard_DS13-4_v2','Standard_D2','Standard_DS12-1_v2','Standard_DS11-1_v2','Standard_DS3','Standard_DS2','Standard_DS3_v2_Promo','Standard_DS2_v2_Promo','Standard_D1','Standard_D2_v2_Promo','Standard_DS14-8_v2','Standard_D4','Standard_DS13-2_v2','Standard_D3','Standard_DS5_v2_Promo','Standard_D4_v2_Promo','Standard_DS4_v2_Promo','Standard_DS4','Standard_DS14-4_v2','Standard_D3_v2_Promo','Standard_D5_v2_Promo'), 494
+,type == "microsoft.apimanagement/service" and (properties.customProperties.['Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10'] == "true" or properties.customProperties.['Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11'] == "true" or properties['customProperties']['Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.TLS10'] == "true" or properties['customProperties']['Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11'] == "true"), 43501
+,type == "microsoft.aad/domainservices"  and properties.domainSecuritySettings.tlsV1 == "Enabled", 43513																			
+,type == 'microsoft.kubernetes/connectedclusters' and properties['distribution'] in ('aks_management','aks_workload') and properties['infrastructure'] == 'azure_stack_hci' and ['kind'] != ('ProvisionedCluster'), 679
 ,type =~ "microsoft.compute/virtualmachines" and isempty(properties.storageProfile.osDisk.managedDisk),84
 ,type =~ "microsoft.dbforpostgresql/servers" ,86
 ,type =~ "microsoft.dbformysql/servers"  ,243
@@ -85,14 +95,19 @@ type contains "microsoft.media/mediaservices",394,
 type =~ "microsoft.containerservice/managedclusters" and properties.addonProfiles.httpApplicationRouting.enabled == true, 353,
 type =~ "microsoft.compute/virtualmachinescalesets" and tags contains 'aks-managed' 
 , case(tostring(properties.virtualMachineProfile.storageProfile.imageReference.id) contains "AKSWindows/images/windows-2022", 560,
- tostring(properties.virtualMachineProfile.storageProfile.imageReference.id) contains "AKSWindows/images/windows-2019", 284,-9999),
-type contains "microsoft.web/sites" and tostring(properties.siteProperties.properties) contains "LinuxFxVersion" and ['kind'] !contains "functionapp" 
-    , case(tostring(properties.siteProperties.properties) contains "PYTHON|3.9",665,
+ tostring(properties.virtualMachineProfile.storageProfile.imageReference.id) contains "AKSWindows/images/windows-2019", 284,-9999)
+,type contains 'microsoft.web/sites' and tostring(properties.siteProperties.properties) contains 'LinuxFxVersion' and tostring(properties.siteProperties.properties) contains ('COMPOSE|'), 173
+,type contains "microsoft.web/sites" and tostring(properties.siteProperties.properties) contains "LinuxFxVersion" and ['kind'] !contains "functionapp"
+, case
+	(
+		tostring(properties.siteProperties.properties) contains "PYTHON|3.9",665,
         tostring(properties.siteProperties.properties) contains"PYTHON|3.8",460,
         tostring(properties.siteProperties.properties) contains"PHP|8.2",664,
         tostring(properties.siteProperties.properties) contains"PHP|8.1",459,
         tostring(properties.siteProperties.properties) contains "NODE|18-lts", 531,
-		-9999)
+		tostring(properties.siteProperties.properties) contains "NODE|20-lts", 570,
+		-9999
+	)
 ,-9999)
 | where ServiceID >0
 | project ServiceID , subscriptionId, type, resourceGroup, location, id, tags = tostring(tags)
@@ -129,17 +144,16 @@ type contains "microsoft.web/sites" and tostring(properties.siteProperties.prope
 (
     AdvisorResources
     | where type =~'microsoft.advisor/recommendations'
-    | where properties.shortDescription contains 'Cloud service caches are being retired' or properties.shortDescription contains 'Move to Azure Update Manager as Automation Update Management will be deprecated' or properties.shortDescription contains 'Upgrade NSG flow logs to VNet flow logs'
+    | where properties.shortDescription contains 'Cloud service caches are being retired' or properties.shortDescription contains 'Move to Azure Update Manager as Automation Update Management will be deprecated' or properties.shortDescription contains 'Upgrade from network security group flow log to Virtual Network flow log'
     | project id=tolower(tostring(properties.resourceMetadata.resourceId))
     | join kind = inner
     (
         resources
         | where type in~ ('microsoft.cache/redis','microsoft.automation/automationAccounts','MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS')
         | extend ServiceID = case (type contains 'microsoft.cache/redis', 124 , type contains 'microsoft.automation/automationAccounts', 245, type contains 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS', 524, -9999)
-        | extend joiningId = tolower(case (type contains 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS', tostring(properties.targetResourceId), id))
-        | project ServiceID, subscriptionId, location, type,  id=tolower(id), tags = tostring(tags), joiningId,resourceGroup
-    ) on $left.id == $right.joiningId
-    | project ServiceID, subscriptionId, type, resourceGroup, location, id = id1, tags  
+        | project ServiceID, subscriptionId, location, type,  id=tolower(id), tags = tostring(tags), resourceGroup
+    ) on id
+    | project ServiceID, subscriptionId, type, resourceGroup, location, id, tags  
 )
 | join kind = leftouter ( 
     resourcecontainers 

@@ -109,7 +109,7 @@ type =~ "microsoft.compute/virtualmachinescalesets" and tags contains 'aks-manag
 		-9999
 	)
 ,-9999)
-| where ServiceID >0
+| where toint(ServiceID) >0
 | project ServiceID , subscriptionId, type, resourceGroup, location, id, tags = tostring(tags)
 | union
 ( resources

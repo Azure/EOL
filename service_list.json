@@ -2042,6 +2042,38 @@
             "Availability under Impacted Services": ""
         },
         {
+            "Id": 174,
+            "ServiceName": "Azure App Service",
+            "RetiringFeature": "Customer Backup - Linked Database Backup",
+            "RetirementDate": "2028-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=485047",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 478,
+            "ServiceName": "Azure Container Apps",
+            "RetiringFeature": "Add-ons (public preview)",
+            "RetirementDate": "2025-09-30",
+            "Link": "https://azure.microsoft.com/updates/?id=485683",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 653,
+            "ServiceName": "Azure Machine Learning",
+            "RetiringFeature": "V1 SDK",
+            "RetirementDate": "2026-06-30",
+            "Link": "https://azure.microsoft.com/updates/?id=486238",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 960,
+            "ServiceName": "Intelligent Recommendations",
+            "RetiringFeature": "Entire Service",
+            "RetirementDate": "2026-03-31",
+            "Link": "https://azure.microsoft.com/updates/?id=484943",
+            "Availability under Impacted Services": ""
+        },
+        {
             "id": "181",
             "ServiceName": "Application Insights",
             "RetiringFeature": "Classic",

@@ -2028,7 +2028,7 @@
         {
             "Id": 679,
             "ServiceName": "Azure Kubernetes Service enabled by Azure Arc",
-            "RetiringFeature": "Windows Server 2019 and Windows Server 2023",
+            "RetiringFeature": "Windows Server 2019 and Windows Server 2022",
             "RetirementDate": "2028-03-27",
             "Link": "https://azure.microsoft.com/updates/?id=485893",
             "Availability under Impacted Services": "Yes"
@@ -3056,7 +3056,7 @@
         {
             "Id": 679,
             "ServiceName": "Azure Kubernetes Service enabled by Azure Arc",
-            "RetiringFeature": "Windows Server 2019 and Windows Server 2023",
+            "RetiringFeature": "Windows Server 2019 and Windows Server 2022",
             "RetirementDate": "2028-03-27",
             "Link": "https://azure.microsoft.com/updates/?id=485893"
         },
@@ -3101,13 +3101,6 @@
             "RetiringFeature": "D, Ds, Dv2, Dsv2 and Ls series",
             "RetirementDate": "2028-05-01",
             "Link": "https://azure.microsoft.com/updates/?id=485569"
-        },
-        {
-            "Id": 850,
-            "ServiceName": "Windows Virtual Machines",
-            "RetiringFeature": "Desired State Configuration extension",
-            "RetirementDate": "2028-03-31",
-            "Link": "https://azure.microsoft.com/updates/?id=485828"
         }
     ],
     "transformers": null

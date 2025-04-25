@@ -2184,224 +2184,224 @@
             "Link": "https://learn.microsoft.com/azure/synapse-analytics/spark/apache-spark-24-runtime"
         },
         {
-            "Id": 13,
+            "id": 13,
             "ServiceName": "App Service",
             "RetiringFeature": "App Service Environment v1/v2",
             "RetirementDate": "2024-08-31",
             "Link": "https://azure.microsoft.com/updates/app-service-environment-v1-v2-retirement/"
         },
         {
-            "Id": 37,
+            "id": 37,
             "ServiceName": "Azure Cosmos DB",
             "RetiringFeature": "v2.x .NET SDK",
             "RetirementDate": "2024-08-31",
             "Link": "https://azure.microsoft.com/updates/action-required-update-your-azure-cosmos-db-net-sdk-to-version-3-by-31-august-2024/"
         },
         {
-            "Id": 40,
+            "id": 40,
             "ServiceName": "Machine Learning Studio (classic)",
             "RetiringFeature": "Entire service",
             "RetirementDate": "2024-08-31",
             "Link": "https://azure.microsoft.com/updates/machine-learning-studio-classic-will-retire-on-31-august-2024/"
         },
         {
-            "Id": 41,
+            "id": 41,
             "ServiceName": "Azure Cosmos DB",
             "RetiringFeature": "Java V3 SDK ",
             "RetirementDate": "2024-08-31",
             "Link": "https://learn.microsoft.com/azure/cosmos-db/nosql/migrate-java-v4-sdk?tabs=java-v4-async"
         },
         {
-            "Id": 42,
+            "id": 42,
             "ServiceName": "Azure Cosmos DB",
             "RetiringFeature": "Java ASync v2.x ",
             "RetirementDate": "2024-08-31",
             "Link": "https://learn.microsoft.com/azure/cosmos-db/nosql/migrate-java-v4-sdk?tabs=java-v4-async"
         },
         {
-            "Id": 47,
+            "id": 47,
             "ServiceName": "Text-to-Speech",
             "RetiringFeature": "Standard Voice",
             "RetirementDate": "2024-08-31",
             "Link": "https://azure.microsoft.com/updates/we-re-retiring-the-standard-voice-on-31-august-2024/"
         },
         {
-            "Id": 48,
+            "id": 48,
             "ServiceName": "Azure Cognitive Search",
             "RetiringFeature": "Skills for Text Analytics v2",
             "RetirementDate": "2024-08-31",
             "Link": "https://azure.microsoft.com/updates/retirement-notice-select-azure-cognitive-search-skills-will-be-retired-on-31-august-2024/"
         },
         {
-            "Id": 68,
+            "id": 68,
             "ServiceName": "Azure Sphere CLI (classic) ",
             "RetiringFeature": "Classic",
             "RetirementDate": "2024-09-30",
             "Link": "https://azure.microsoft.com/updates/important-notice-azure-product-retirement-end-of-life-announcement-of-azure-sphere-classic-cli-on-30-september-2024-replace-w/"
         },
         {
-            "Id": 76,
+            "id": 76,
             "ServiceName": "Cognitive Services",
             "RetiringFeature": "QnAMaker",
             "RetirementDate": "2025-03-31",
             "Link": "https://azure.microsoft.com/updates/azure-qna-maker-will-be-retired-on-31-march-2025/"
         },
         {
-            "Id": 124,
+            "id": 124,
             "ServiceName": "Azure Cache for Redis",
             "RetiringFeature": "Classic",
             "RetirementDate": "2024-08-31",
             "Link": "https://learn.microsoft.com/azure/azure-cache-for-redis/cache-faq"
         },
         {
-            "Id": 137,
+            "id": 137,
             "ServiceName": "Azure Batch",
             "RetiringFeature": "HPC Pack burst to Cloud services",
             "RetirementDate": "2024-08-31",
             "Link": "https://azure.microsoft.com/updates/azure-hpc-pack-burst-to-cloud-services-will-be-retired-on-31-august-2024/"
         },
         {
-            "Id": 243,
+            "id": 243,
             "ServiceName": "Azure Database for MySQL",
             "RetiringFeature": "Single server",
             "RetirementDate": "2024-09-16",
             "Link": "https://learn.microsoft.com/azure/mysql/single-server/whats-happening-to-mysql-single-server"
         },
         {
-            "Id": 343,
+            "id": 343,
             "ServiceName": "Azure Functions",
             "RetiringFeature": "Version 3.x of the Azure Cosmos DB extension",
             "RetirementDate": "2024-08-31",
             "Link": "https://azure.microsoft.com/updates/update-to-azure-functions-cosmos-db-extension-version-4x-by-31-august-2024-for-continued-support/"
         },
         {
-            "Id": 353,
+            "id": 353,
             "ServiceName": "Azure Kubernetes Service",
             "RetiringFeature": "HTTP Application Routing add-on",
             "RetirementDate": "2025-03-03",
             "Link": "https://azure.microsoft.com/updates/retirement-http-application-routing-addon-preview-for-aks-will-retire-03032025/"
         },
         {
-            "Id": 414,
+            "id": 414,
             "ServiceName": "Storage Account",
             "RetiringFeature": "Ruby client libraries",
             "RetirementDate": "2024-09-13",
             "Link": "https://azure.microsoft.com/updates/retirement-notice-the-azure-storage-ruby-client-libraries-will-be-retired-on-13-september-2024/"
         },
         {
-            "Id": 415,
+            "id": 415,
             "ServiceName": "Storage Account",
             "RetiringFeature": "Android client libraries",
             "RetirementDate": "2024-09-13",
             "Link": "https://azure.microsoft.com/updates/retirement-notice-the-azure-storage-android-client-libraries-will-be-retired-on-13-september-2024/"
         },
         {
-            "Id": 417,
+            "id": 417,
             "ServiceName": "Storage Account",
             "RetiringFeature": "Legacy Go client libraries - Blob",
             "RetirementDate": "2024-09-13",
             "Link": "https://azure.microsoft.com/updates/retirement-notice-the-legacy-azure-storage-go-client-libraries-will-be-retired-on-13-september-2024/"
         },
         {
-            "Id": 418,
+            "id": 418,
             "ServiceName": "Storage Account",
             "RetiringFeature": "Legacy Go client libraries - Queue",
             "RetirementDate": "2024-09-13",
             "Link": "https://azure.microsoft.com/updates/retirement-notice-the-legacy-azure-storage-go-client-libraries-will-be-retired-on-13-september-2024/"
         },
         {
-            "Id": 419,
+            "id": 419,
             "ServiceName": "Storage Account",
             "RetiringFeature": "Legacy Go client libraries - File",
             "RetirementDate": "2024-09-13",
             "Link": "https://azure.microsoft.com/updates/retirement-notice-the-legacy-azure-storage-go-client-libraries-will-be-retired-on-13-september-2024/"
         },
         {
-            "Id": 422,
+            "id": 422,
             "ServiceName": "Storage Account",
             "RetiringFeature": "Legacy Java client libraries",
             "RetirementDate": "2024-09-13",
             "Link": "https://azure.microsoft.com/updates/retirement-notice-the-legacy-azure-storage-java-client-libraries-will-be-retired-on-13-september-2024/"
         },
         {
-            "Id": 489,
+            "id": 489,
             "ServiceName": "Cost Management",
             "RetiringFeature": "Connector for AWS",
             "RetirementDate": "2025-03-31",
             "Link": "https://azure.microsoft.com/updates/crossclouddeprecation/"
         },
         {
-            "Id": 554,
+            "id": 554,
             "ServiceName": "Azure Grafana Services",
             "RetiringFeature": "Grafana 9",
             "RetirementDate": "2024-08-31",
             "Link": "https://azure.microsoft.com/updates/action-recommended-update-to-using-grafana-version-10-for-azure-managed-grafana/"
         },
         {
-            "Id": 562,
+            "id": 562,
             "ServiceName": "HDInsight",
             "RetiringFeature": "4.0",
             "RetirementDate": "2025-03-31",
             "Link": "https://azure.microsoft.com/updates/azure-hdinsight-40-will-be-retired-on-31-march-2025-migrate-your-hdinsight-clusters-to-51/"
         },
         {
-            "Id": 563,
+            "id": 563,
             "ServiceName": "HDInsight",
             "RetiringFeature": "5.0",
             "RetirementDate": "2025-03-31",
             "Link": "https://azure.microsoft.com/updates/hdinsight5retire/"
         },
         {
-            "Id": 623,
+            "id": 623,
             "ServiceName": "Azure Spring Apps",
             "RetiringFeature": "Consumption Plan",
             "RetirementDate": "2025-03-31",
             "Link": "https://azure.microsoft.com/updates/v2/Azure-Spring-Apps-will-be-retired-on-March-31-2028"
         },
         {
-            "Id": 694,
+            "id": 694,
             "ServiceName": "Azure Resource Manager",
             "RetiringFeature": "Support for TLS 1.0 and 1.1",
             "RetirementDate": "2025-03-01",
             "Link": "https://learn.microsoft.com/azure/azure-resource-manager/management/tls-support"
         },
         {
-            "Id": 800,
+            "id": 800,
             "ServiceName": "Azure CDN from Edgio",
             "RetiringFeature": "Entire service",
             "RetirementDate": "2025-01-15",
             "Link": "https://azure.microsoft.com/updates?id=467688"
         },
         {
-            "Id": 7001,
+            "id": 7001,
             "ServiceName": "Event Hub",
             "RetiringFeature": "Support for TLS 1.0 and 1.1",
             "RetirementDate": "2025-02-28",
             "Link": "https://learn.microsoft.com/azure/service-bus-messaging/transport-layer-security-configure-minimum-version"
         },
         {
-            "Id": 7002,
+            "id": 7002,
             "ServiceName": "Relay",
             "RetiringFeature": "Support for TLS 1.0 and 1.1",
             "RetirementDate": "2025-02-28",
             "Link": "https://learn.microsoft.com/azure/service-bus-messaging/transport-layer-security-configure-minimum-version"
         },
         {
-            "Id": 43502,
+            "id": 43502,
             "ServiceName": "Service Bus",
             "RetiringFeature": "Support for TLS 1.0 and 1.1",
             "RetirementDate": "2025-02-28",
             "Link": "https://learn.microsoft.com/azure/service-bus-messaging/transport-layer-security-configure-minimum-version"
         },
         {
-            "Id": 43509,
+            "id": 43509,
             "ServiceName": "Azure Front Door",
             "RetiringFeature": "Support for TLS 1.0 and 1.1",
             "RetirementDate": "2025-03-01",
             "Link": "https://learn.microsoft.com/azure/frontdoor/end-to-end-tls?pivots=front-door-standard-premium"
         },
         {
-            "Id": 421,
+            "id": 421,
             "ServiceName": "Azure Monitor",
             "RetiringFeature": " Log Analytics agent–based VM insights",
             "RetirementDate": "2024-08-31",

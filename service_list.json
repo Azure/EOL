@@ -2,14 +2,6 @@
     "version": "1.0.0",
     "content": [
         {
-            "Id": 550,
-            "ServiceName": "Azure Batch pools",
-            "RetiringFeature": "Basic and Standard A-series VMs",
-            "RetirementDate": "2024-08-31",
-            "Link": "https://azure.microsoft.com/updates/basic-and-standard-aseries-vms-on-hdinsight-will-retire-on-31-august-2024/",
-            "Availability under Impacted Services": ""
-        },
-        {
             "Id": 535,
             "ServiceName": "Azure classic administrator roles",
             "RetiringFeature": "Entire service",
@@ -183,30 +175,6 @@
             "RetiringFeature": "Server",
             "RetirementDate": "2024-09-30",
             "Link": "https://learn.microsoft.com/entra/identity/monitoring-health/recommendation-migrate-to-microsoft-entra-mfa",
-            "Availability under Impacted Services": ""
-        },
-        {
-            "Id": 440,
-            "ServiceName": "Azure Batch",
-            "RetiringFeature": "Pool list usage metrics API",
-            "RetirementDate": "2024-09-30",
-            "Link": "https://azure.microsoft.com/updates/azure-batch-pool-list-usage-metrics-api-will-be-retired-on-30-september-2024/",
-            "Availability under Impacted Services": ""
-        },
-        {
-            "Id": 441,
-            "ServiceName": "Azure Batch",
-            "RetiringFeature": "CLI extensions",
-            "RetirementDate": "2024-09-30",
-            "Link": "https://azure.microsoft.com/updates/azure-batch-cli-extensions-will-be-retired-on-30-september-2024/",
-            "Availability under Impacted Services": ""
-        },
-        {
-            "Id": 442,
-            "ServiceName": "Azure Batch",
-            "RetiringFeature": "Task authentication token",
-            "RetirementDate": "2024-09-30",
-            "Link": "https://azure.microsoft.com/updates/azure-batch-task-authentication-token-will-be-retired-on-30-september-2024/",
             "Availability under Impacted Services": ""
         },
         {
@@ -407,7 +375,7 @@
             "RetiringFeature": "Support for TLS 1.0 and 1.1",
             "RetirementDate": "2025-08-31",
             "Link": "https://learn.microsoft.com/azure/mysql/flexible-server/how-to-connect-tls-ssl",
-            "Availability under Impacted Services": ""
+            "Availability under Impacted Services": "Yes"
         },
         {
             "Id": 459,
@@ -554,14 +522,6 @@
             "Availability under Impacted Services": ""
         },
         {
-            "Id": 176,
-            "ServiceName": "Application Insights",
-            "RetiringFeature": "Instrumentation key based global ingestion",
-            "RetirementDate": "2025-03-31",
-            "Link": "https://azure.microsoft.com/updates/technical-support-for-instrumentation-key-based-global-ingestion-in-application-insights-will-end-on-31-march-2025/",
-            "Availability under Impacted Services": ""
-        },
-        {
             "Id": 267,
             "ServiceName": "Azure SQL",
             "RetiringFeature": "Connector v1 operations",
@@ -578,27 +538,11 @@
             "Availability under Impacted Services": ""
         },
         {
-            "Id": 443,
-            "ServiceName": "Azure CycleCloud",
-            "RetiringFeature": "Chef Run_lists and Cookbooks",
-            "RetirementDate": "2025-03-31",
-            "Link": "https://azure.microsoft.com/updates/azure-cyclecloud-support-for-chef-runlists-and-cookbooks-in-clusterinit-projects-is-ending-on-31-march-2025/",
-            "Availability under Impacted Services": ""
-        },
-        {
             "Id": 492,
             "ServiceName": "Visual Studio App Center",
             "RetiringFeature": "Entire service",
             "RetirementDate": "2025-03-31",
             "Link": "https://azure.microsoft.com/updates/visual-studio-app-center-retirement/",
-            "Availability under Impacted Services": ""
-        },
-        {
-            "Id": 534,
-            "ServiceName": "Azure Functions",
-            "RetiringFeature": "Service Bus Extension v4",
-            "RetirementDate": "2025-03-31",
-            "Link": "https://azure.microsoft.com/updates/update-to-azure-functions-service-bus-extension-v5x-by-31-march-2025-for-continued-support/",
             "Availability under Impacted Services": ""
         },
         {
@@ -647,14 +591,6 @@
             "RetiringFeature": "Helm Repositories",
             "RetirementDate": "2025-03-31",
             "Link": "https://azure.microsoft.com/updates/v2/acr-helm-repositories-retirement",
-            "Availability under Impacted Services": ""
-        },
-        {
-            "Id": 43504,
-            "ServiceName": "Synapse Dedicated Pool",
-            "RetiringFeature": "Support for TLS 1.0 and 1.1",
-            "RetirementDate": "2025-03-31",
-            "Link": "https://learn.microsoft.com/azure/synapse-analytics/security/connectivity-settings",
             "Availability under Impacted Services": ""
         },
         {
@@ -997,7 +933,7 @@
             "Id": 160,
             "ServiceName": "Cognitive Services",
             "RetiringFeature": "Language Understanding (LUIS)",
-            "RetirementDate": "2025-10-01",
+            "RetirementDate": "2025-10-31",
             "Link": "https://azure.microsoft.com/updates/language-understanding-retirement/",
             "Availability under Impacted Services": "Yes"
         },
@@ -1834,6 +1770,14 @@
             "Availability under Impacted Services": ""
         },
         {
+            "Id": 43512,
+            "ServiceName": "Azure Monitor",
+            "RetiringFeature": "Support for TLS 1.0 and 1.1",
+            "RetirementDate": "2025-07-01",
+            "Link": "https://learn.microsoft.com/azure/azure-monitor/fundamentals/best-practices-security#send-data-to-your-workspace-using-transport-layer-security-tls-12-or-higher",
+            "Availability under Impacted Services": ""
+        },
+        {
             "id": "181",
             "ServiceName": "Application Insights",
             "RetiringFeature": "Classic",
@@ -2408,6 +2352,62 @@
             "Link": "https://azure.microsoft.com/updates/migrate-to-azure-monitor-agent-based-vm-insights-by-31-august-2024/"
         },
         {
+            "id": 176,
+            "ServiceName": "Application Insights",
+            "RetiringFeature": "Instrumentation key based global ingestion",
+            "RetirementDate": "2025-03-31",
+            "Link": "https://azure.microsoft.com/updates/technical-support-for-instrumentation-key-based-global-ingestion-in-application-insights-will-end-on-31-march-2025/"
+        },
+        {
+            "id": 443,
+            "ServiceName": "Azure CycleCloud",
+            "RetiringFeature": "Chef Run_lists and Cookbooks",
+            "RetirementDate": "2025-03-31",
+            "Link": "https://azure.microsoft.com/updates/azure-cyclecloud-support-for-chef-runlists-and-cookbooks-in-clusterinit-projects-is-ending-on-31-march-2025/"
+        },
+        {
+            "id": 534,
+            "ServiceName": "Azure Functions",
+            "RetiringFeature": "Service Bus Extension v4",
+            "RetirementDate": "2025-03-31",
+            "Link": "https://azure.microsoft.com/updates/update-to-azure-functions-service-bus-extension-v5x-by-31-march-2025-for-continued-support/"
+        },
+        {
+            "id": 550,
+            "ServiceName": "Azure Batch",
+            "RetiringFeature": "Basic and Standard A-series VMs",
+            "RetirementDate": "2024-08-31",
+            "Link": "https://azure.microsoft.com/updates/basic-and-standard-aseries-vms-on-hdinsight-will-retire-on-31-august-2024/"
+        },
+        {
+            "id": 440,
+            "ServiceName": "Azure Batch",
+            "RetiringFeature": "Pool list usage metrics API",
+            "RetirementDate": "2024-09-30",
+            "Link": "https://azure.microsoft.com/updates/azure-batch-pool-list-usage-metrics-api-will-be-retired-on-30-september-2024/"
+        },
+        {
+            "id": 441,
+            "ServiceName": "Azure Batch",
+            "RetiringFeature": "CLI extensions",
+            "RetirementDate": "2024-09-30",
+            "Link": "https://azure.microsoft.com/updates/azure-batch-cli-extensions-will-be-retired-on-30-september-2024/"
+        },
+        {
+            "id": 442,
+            "ServiceName": "Azure Batch",
+            "RetiringFeature": "Task authentication token",
+            "RetirementDate": "2024-09-30",
+            "Link": "https://azure.microsoft.com/updates/azure-batch-task-authentication-token-will-be-retired-on-30-september-2024/"
+        },
+        {
+            "id": 43504,
+            "ServiceName": "Synapse Dedicated Pool",
+            "RetiringFeature": "Support for TLS 1.0 and 1.1",
+            "RetirementDate": "2025-03-31",
+            "Link": "https://learn.microsoft.com/azure/synapse-analytics/security/connectivity-settings"
+        },
+        {
             "Id": 583,
             "ServiceName": "Azure Synapse",
             "RetiringFeature": "Runtime for Apache Spark 3.2",
@@ -2621,7 +2621,7 @@
             "Id": 160,
             "ServiceName": "Cognitive Services",
             "RetiringFeature": "Language Understanding (LUIS)",
-            "RetirementDate": "2025-10-01",
+            "RetirementDate": "2025-10-31",
             "Link": "https://azure.microsoft.com/updates/language-understanding-retirement/"
         },
         {
@@ -3008,6 +3008,20 @@
             "RetiringFeature": "Desired State Configuration extension",
             "RetirementDate": "2028-03-31",
             "Link": "https://azure.microsoft.com/updates/?id=485828"
+        },
+        {
+            "Id": 43512,
+            "ServiceName": "Azure Monitor",
+            "RetiringFeature": "Support for TLS 1.0 and 1.1",
+            "RetirementDate": "2025-07-01",
+            "Link": "https://learn.microsoft.com/azure/azure-monitor/fundamentals/best-practices-security#send-data-to-your-workspace-using-transport-layer-security-tls-12-or-higher"
+        },
+        {
+            "Id": 910,
+            "ServiceName": "Azure Database for MySQL Flexible Server",
+            "RetiringFeature": "Support for TLS 1.0 and 1.1",
+            "RetirementDate": "2025-08-31",
+            "Link": "https://learn.microsoft.com/azure/mysql/flexible-server/how-to-connect-tls-ssl"
         }
     ],
     "transformers": null

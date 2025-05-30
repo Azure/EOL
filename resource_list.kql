@@ -139,13 +139,16 @@ type =~ "microsoft.compute/virtualmachinescalesets" and tags contains 'aks-manag
 (
     AdvisorResources
     | where type =~'microsoft.advisor/recommendations'
-    | where properties.shortDescription contains 'Cloud service caches are being retired' or properties.shortDescription contains 'Move to Azure Update Manager as Automation Update Management will be deprecated' or properties.shortDescription contains 'Upgrade from network security group flow log to Virtual Network flow log'
+    | where properties.shortDescription contains 'Cloud service caches are being retired' 
+		or properties.shortDescription contains 'Move to Azure Update Manager as Automation Update Management will be deprecated' 
+		or properties.shortDescription contains 'Upgrade from network security group flow log to Virtual Network flow log'
+		or properties.shortDescription contains 'Upgrade to Transport Layer Security (TLS) 1.2'
     | project id=tolower(tostring(properties.resourceMetadata.resourceId))
     | join kind = inner
     (
         resources
         | where type in~ ('microsoft.cache/redis','microsoft.automation/automationAccounts','MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS')
-        | extend ServiceID = case (type contains 'microsoft.automation/automationAccounts', 245, type contains 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS', 524, -9999)
+        | extend ServiceID = case (type contains 'microsoft.automation/automationAccounts', 245, type contains 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS', 524, type contains 'microsoft.dbformysql/flexibleservers', 910,-9999)
         | project ServiceID, subscriptionId, location, type,  id=tolower(id), tags = tostring(tags), resourceGroup
     ) on id
     | project ServiceID, subscriptionId, type, resourceGroup, location, id, tags  

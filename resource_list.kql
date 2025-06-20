@@ -82,6 +82,8 @@ type =~ "microsoft.datalakestore/accounts" and not(location in ('westcentralus',
 type =~ "microsoft.migrate/projects",187,
 type =~ "microsoft.insights/alertrules",200,
 type contains "microsoft.media/mediaservices",394,
+type contains 'microsoft.compute/virtualmachines' and properties['hardwareProfile']['vmSize'] startswith 'Standard_DC' and properties['hardwareProfile']['vmSize'] endswith '_v2', 499,
+type =~ 'microsoft.web/staticsites' and tostring(sku.name) =~ 'Dedicated',15,
 type =~ "microsoft.compute/virtualmachinescalesets" and tags contains 'aks-managed' 
 , case(tostring(properties.virtualMachineProfile.storageProfile.imageReference.id) contains "AKSWindows/images/windows-2022", 560,
  tostring(properties.virtualMachineProfile.storageProfile.imageReference.id) contains "AKSWindows/images/windows-2019", 284,-9999)
@@ -95,6 +97,7 @@ type =~ "microsoft.compute/virtualmachinescalesets" and tags contains 'aks-manag
         tostring(properties.siteProperties.properties) contains "PHP|8.1",459,
         tostring(properties.siteProperties.properties) contains "NODE|18-lts", 531,
 		tostring(properties.siteProperties.properties) contains "NODE|20-lts", 570,
+		tostring(properties.siteProperties.properties) contains "DOTNETCORE|9.0", 14,
 		-9999
 	)
 ,type contains "microsoft.web/sites" and tostring(properties.siteProperties.properties) contains "LinuxFxVersion" and ['kind'] contains "functionapp"
@@ -143,12 +146,18 @@ type =~ "microsoft.compute/virtualmachinescalesets" and tags contains 'aks-manag
 		or properties.shortDescription contains 'Move to Azure Update Manager as Automation Update Management will be deprecated' 
 		or properties.shortDescription contains 'Upgrade from network security group flow log to Virtual Network flow log'
 		or properties.shortDescription contains 'Upgrade to Transport Layer Security (TLS) 1.2'
-    | project id=tolower(tostring(properties.resourceMetadata.resourceId))
+    | project id=tolower(tostring(properties.resourceMetadata.resourceId)), shortDescription=properties.shortDescription
     | join kind = inner
     (
         resources
         | where type in~ ('microsoft.cache/redis','microsoft.automation/automationAccounts','MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS')
-        | extend ServiceID = case (type contains 'microsoft.automation/automationAccounts', 245, type contains 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS', 524, type contains 'microsoft.dbformysql/flexibleservers', 910,-9999)
+        | extend ServiceID = case 
+			(
+				type contains 'microsoft.automation/automationAccounts', 245, 
+				type contains 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS', 524, 
+				type contains 'microsoft.dbformysql/flexibleservers', 910,
+				-9999
+			)
         | project ServiceID, subscriptionId, location, type,  id=tolower(id), tags = tostring(tags), resourceGroup
     ) on id
     | project ServiceID, subscriptionId, type, resourceGroup, location, id, tags  

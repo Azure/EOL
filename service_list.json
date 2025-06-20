@@ -629,7 +629,7 @@
             "Id": 430,
             "ServiceName": "SAP HANA Large Instances (HLIs)",
             "RetiringFeature": "Entire service",
-            "RetirementDate": "2025-06-30",
+            "RetirementDate": "2025-12-31",
             "Link": "https://azure.microsoft.com/updates/sap-hana-on-azure-large-instances-will-be-retired-by-30-june-2025-transition-to-virtual-machines/",
             "Availability under Impacted Services": ""
         },
@@ -1759,7 +1759,7 @@
             "RetiringFeature": "Support for Python 3.9",
             "RetirementDate": "2025-10-31",
             "Link": "https://azure.microsoft.com/updates/?id=489428",
-            "Availability under Impacted Services": ""
+            "Availability under Impacted Services": "Yes"
         },
         {
             "Id": 338,
@@ -1775,6 +1775,46 @@
             "RetiringFeature": "Support for TLS 1.0 and 1.1",
             "RetirementDate": "2025-07-01",
             "Link": "https://learn.microsoft.com/azure/azure-monitor/fundamentals/best-practices-security#send-data-to-your-workspace-using-transport-layer-security-tls-12-or-higher",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 15,
+            "ServiceName": "Azure Static Web Apps",
+            "RetiringFeature": "Dedicated plan",
+            "RetirementDate": "2025-10-31",
+            "Link": "https://azure.microsoft.com/updates/?id=492371",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 32,
+            "ServiceName": "Bing Search",
+            "RetiringFeature": "Search and Custom Search APIs",
+            "RetirementDate": "2025-08-11",
+            "Link": "https://azure.microsoft.com/updates/?id=492574",
+            "Availability under Impacted Services": ""
+        },
+        {
+            "Id": 14,
+            "ServiceName": "App Service",
+            "RetiringFeature": ".NET 9 (STS)",
+            "RetirementDate": "2026-05-12",
+            "Link": "https://azure.microsoft.com/updates/?id=485077",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 499,
+            "ServiceName": "Virtual Machines",
+            "RetiringFeature": "DCsv2-series",
+            "RetirementDate": "2026-06-30",
+            "Link": "https://azure.microsoft.com/updates/?id=496104",
+            "Availability under Impacted Services": "Yes"
+        },
+        {
+            "Id": 266,
+            "ServiceName": "Azure AI Vision",
+            "RetiringFeature": "Video Retrieval",
+            "RetirementDate": "2025-06-30",
+            "Link": "https://learn.microsoft.com/azure/ai-services/computer-vision/intro-to-spatial-analysis-public-preview",
             "Availability under Impacted Services": ""
         },
         {
@@ -3022,6 +3062,27 @@
             "RetiringFeature": "Support for TLS 1.0 and 1.1",
             "RetirementDate": "2025-08-31",
             "Link": "https://learn.microsoft.com/azure/mysql/flexible-server/how-to-connect-tls-ssl"
+        },
+        {
+            "Id": 15,
+            "ServiceName": "Azure Static Web Apps",
+            "RetiringFeature": "Dedicated plan",
+            "RetirementDate": "2025-10-31",
+            "Link": "https://azure.microsoft.com/updates/?id=492371"
+        },
+        {
+            "Id": 14,
+            "ServiceName": "App Service",
+            "RetiringFeature": ".NET 9 (STS)",
+            "RetirementDate": "2026-05-12",
+            "Link": "https://azure.microsoft.com/updates/?id=485077"
+        },
+        {
+            "Id": 499,
+            "ServiceName": "Virtual Machines",
+            "RetiringFeature": "DCsv2-series",
+            "RetirementDate": "2026-06-30",
+            "Link": "https://azure.microsoft.com/updates/?id=496104"
         }
     ],
     "transformers": null

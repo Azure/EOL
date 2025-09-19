@@ -2,10 +2,7 @@ resources
 | extend ServiceID = 
 	case
 	(
-		type == 'microsoft.network/virtualnetworkgateways' 
-			and properties['vpnClientConfiguration']['vpnAuthenticationTypes'] contains 'AAD' 
-			and properties['vpnClientConfiguration']['aadAudience'] == '41b23e61-6c1e-4545-b367-cd054e0ed4b4', 604
-		,type == 'microsoft.containerservice/managedclusters' and properties.networkProfile.networkPlugin == 'kubenet', 657
+		type == 'microsoft.containerservice/managedclusters' and properties.networkProfile.networkPlugin == 'kubenet', 657
 		,type == 'microsoft.compute/cloudservices', 950
 		,type == 'microsoft.containerregistry/registries' and properties['policies']['trustPolicy']['status'] == 'enabled', 600
 		,type == 'microsoft.appplatform/spring', 810
@@ -27,7 +24,9 @@ resources
 		,type == 'microsoft.kubernetes/connectedclusters' 
 			and properties['distribution'] in ('aks_management','aks_workload')
 			and properties['infrastructure'] == 'azure_stack_hci' and ['kind'] != ('ProvisionedCluster'), 679
-		,type =~ 'microsoft.compute/virtualmachines' and isempty(properties.storageProfile.osDisk.managedDisk), 84
+		,type == 'microsoft.kubernetes/connectedclusters' 
+			and properties['distribution'] in ('aks_management','aks_workload')
+			and properties['infrastructure'] contains 'vSphere' and ['kind'] != ('ProvisionedCluster'), 341
 		,type =~ 'microsoft.dbformysql/servers', 243
 		,type =~ 'microsoft.network/loadbalancers' and sku.name=~'Basic', 94
 		,type =~ 'microsoft.operationsmanagement/solutions' and plan.product=~'OMSGallery/ServiceMap', 213
@@ -79,28 +78,24 @@ resources
 			-9999
 		)
 		,type contains 'microsoft.storagecache/caches', 500
-		,type contains 'microsoft.network/virtualnetworkgateways', case
+		,type contains 'microsoft.network/virtualnetworkgateways', 
+		case
 		( 
 			(tostring(properties.sku.name) in~ ('Standard','HighPerformance' ) and tostring(properties.gatewayType) contains ('Vpn')), 481
-			,(tostring(parse_json(properties)['sku']['name']) in ('VpnGw1','VpnGw2','VpnGw3','VpnGw4','VpnGw5') and tostring(parse_json(properties)['gatewayType']) contains 'Vpn'), 611,    
+			,(tostring(properties.vpnClientConfiguration.vpnAuthenticationTypes) contains 'AAD' and tostring(properties.vpnClientConfiguration.aadAudience) == '41b23e61-6c1e-4545-b367-cd054e0ed4b4'), 604
+			,(tostring(parse_json(properties)['sku']['name']) in ('VpnGw1','VpnGw2','VpnGw3','VpnGw4','VpnGw5') and tostring(parse_json(properties)['gatewayType']) contains 'Vpn'), 611,
 			-9999
-		)	   
+		)
 		,type in~ ('microsoft.labservices/labplans', 'microsoft.labservices/labs', 'microsoft.labservices/labaccounts'), 624
 		,type contains 'microsoft.mixedreality/remoterenderingaccounts', 660
 		,type =~ 'microsoft.cdn/profiles', case(sku contains 'Standard_Microsoft' and kind == 'cdn', 619, -9999)
 		,type =~ 'microsoft.network/applicationgateways' and properties.sku.tier in~ ('Standard','WAF'), 298
 		,type contains 'microsoft.network/applicationgateways' and properties['sku']['tier'] in~ ('WAF_v2') and isnotnull(properties['webApplicationFirewallConfiguration']), 519
-		,type =~ 'microsoft.network/applicationgateways' and 
-		(
-				properties['sslPolicy']['minProtocolVersion'] != 'TLSv1_2' and ​properties['sslPolicy']['minProtocolVersion'] != 'TLSv1_3'​ 
-				and properties['sslPolicy']['policyName'] !contains '2022' and properties['sslPolicy']['policyName'] !contains '401S' 
-				and properties['defaultPredefinedSslPolicy'] !contains '2022'
-		), 714
-		,type =~ 'microsoft.cache/redis' and (tostring(properties['minimumTlsVersion']) !in ('1.2', '1.3')), 403
 		,type contains 'microsoft.documentdb/databaseaccounts' and (isempty(properties['minimalTlsVersion']) or properties['minimalTlsVersion'] in ('Tls11', 'Tls')), 703
 		,type contains 'microsoft.eventgrid/' and tostring(properties['minimumTlsVersionAllowed']) in ('1.1', '1.0'), 669
 		,type =~ 'microsoft.sql/servers' and properties['minimalTlsVersion'] in ('None','1.0', '1.1'), 43503
-		,type == 'microsoft.storage/storageaccounts' and (isempty(properties['minimumTlsVersion']) or properties['minimumTlsVersion'] in ('TLS1_0', 'TLS1_1')), 43507
+		,type =~ 'microsoft.storage/storageaccounts' and (isempty(properties['minimumTlsVersion']) or properties['minimumTlsVersion'] in ('TLS1_0', 'TLS1_1')), 43507
+		,type =~ 'microsoft.storage/storageaccounts' and sku.name in~ ('Standard_LRS', 'Standard_GRS', 'Standard_ZRS', 'Standard_RAGRS', 'Standard_RAGZRS') and kind != 'StorageV2', 416
 		,type =~ 'microsoft.sql/managedinstances' and properties['minimalTlsVersion'] in ('None', '1.0','1.1'), 43508
 		,type =~ 'microsoft.datalakeanalytics/accounts' and not(location in ('westcentralus','westus2','westus3')) and properties contains 'defaultDataLakeStoreAccount', 18
 		,type == 'microsoft.compute/virtualmachines/extensions' and tolower(name) == 'microsoft.powershell.dsc' and toupper(substring(id, 0, indexof(id, '/extensions'))) != '', 850
@@ -110,16 +105,19 @@ resources
 		,type =~ 'microsoft.insights/components' and isempty(properties.WorkspaceResourceId), 181
 		,type =~ 'microsoft.datalakestore/accounts' and not(location in ('westcentralus','westus2')), 182
 		,type =~ 'microsoft.migrate/projects', 187
+		,type =~ 'microsoft.scom/managedinstances', 50
 		,type =~ 'microsoft.insights/alertrules', 200
 		,type contains 'microsoft.media/mediaservices', 394
+		,type =~ 'microsoft.compute/disks' and tostring(parse_json(sku).name) == 'Standard_LRS' and tostring(parse_json(properties).osType) in ('Windows', 'Linux'), 83
 		,type contains 'microsoft.compute/virtualmachines' 
 			and properties['hardwareProfile']['vmSize'] startswith 'Standard_DC' 
 			and properties['hardwareProfile']['vmSize'] endswith '_v2', 499
 		,type =~ 'microsoft.web/staticsites' and tostring(sku.name) =~ 'Dedicated',15
+		,type =~ 'microsoft.web/kubeenvironments',170
+		,type =~ 'microsoft.databricks/workspaces' and sku.name =~ 'standard',365
 		,type =~ 'microsoft.compute/virtualmachinescalesets' 
 			and tags contains 'aks-managed', case(tostring(properties.virtualMachineProfile.storageProfile.imageReference.id) contains 'AKSWindows/images/windows-2022', 560
-		,tostring(properties.virtualMachineProfile.storageProfile.imageReference.id) contains 'AKSWindows/images/windows-2019', 284, -9999),
-		type contains 'microsoft.web/sites' and tostring(properties.siteProperties.properties) contains 'LinuxFxVersion' and tostring(properties.siteProperties.properties) contains ('COMPOSE|'), 173
+		,tostring(properties.virtualMachineProfile.storageProfile.imageReference.id) contains 'AKSWindows/images/windows-2019', 284, -9999)
 		,type contains 'microsoft.web/sites' and tostring(properties.siteProperties.properties) contains 'LinuxFxVersion' and ['kind'] !contains 'functionapp'
 		, case
 		(
@@ -148,6 +146,9 @@ resources
 		(type =~ 'microsoft.synapse/workspaces/bigdatapools' and todouble(properties.sparkVersion) in (2.4,3.1,3.2, 3.3)) 
 		or (type contains 'microsoft.hdinsight/clusters') 
 		or (type =~ 'microsoft.network/loadbalancers' and sku.name =~ 'Standard')
+		or (type =~ 'microsoft.compute/virtualmachines' and isempty(properties.storageProfile.osDisk.managedDisk))
+		or (type =~ 'microsoft.network/applicationgateways' and (properties['sslPolicy']['minProtocolVersion'] != 'TLSv1_2' and ​properties['sslPolicy']['minProtocolVersion'] != 'TLSv1_3'​ and properties['sslPolicy']['policyName'] !contains '2022' and properties['sslPolicy']['policyName'] !contains '401S' and properties['defaultPredefinedSslPolicy'] !contains '2022'))
+		or (type contains 'microsoft.web/sites' and tostring(properties.siteProperties.properties) contains 'LinuxFxVersion' and tostring(properties.siteProperties.properties) contains ('COMPOSE|'))
 	| extend workspaceId = tostring(split(id,'/')[8]), sparkVersion = todouble(properties.sparkVersion)
 	| join kind = leftouter 
 	(	 
@@ -156,7 +157,7 @@ resources
 		| project workspaceId = name
 		| distinct workspaceId
 	) on workspaceId
-	| where (type =~ 'microsoft.synapse/workspaces/bigdatapools' and isnotempty(workspaceId1)) or (type contains 'microsoft.hdinsight/clusters') or (type =~ 'microsoft.network/loadbalancers' and sku.name =~ 'Standard')
+	| where (type =~ 'microsoft.synapse/workspaces/bigdatapools' and isnotempty(workspaceId1)) or (type contains 'microsoft.hdinsight/clusters') or (type =~ 'microsoft.network/loadbalancers' and sku.name =~ 'Standard') or (type =~ 'microsoft.compute/virtualmachines' and  isempty(properties.storageProfile.osDisk.managedDisk) or (type =~ 'microsoft.network/applicationgateways' and (properties['sslPolicy']['minProtocolVersion'] != 'TLSv1_2' and ​properties['sslPolicy']['minProtocolVersion'] != 'TLSv1_3'​ and properties['sslPolicy']['policyName'] !contains '2022' and properties['sslPolicy']['policyName'] !contains '401S' and properties['defaultPredefinedSslPolicy'] !contains '2022'))) or (type contains 'microsoft.web/sites' and tostring(properties.siteProperties.properties) contains 'LinuxFxVersion' and tostring(properties.siteProperties.properties) contains ('COMPOSE|'))
 	| mv-expand properties.computeProfile.roles
 	| mv-expand properties_computeProfile_roles
 	| mv-expand inboundNatRules = todynamic(properties['inboundNatRules'])
@@ -169,6 +170,9 @@ resources
 				type =~ 'microsoft.synapse/workspaces/bigdatapools' and sparkVersion == 3.1, 325, 
 				type =~ 'microsoft.synapse/workspaces/bigdatapools' and sparkVersion == 3.2, 583, 
 				type =~ 'microsoft.network/loadbalancers' and sku.name =~ 'Standard' and ((isnotempty(inboundNatRules.properties.backendIPConfiguration) and array_length(properties.inboundNatPools) == 0) or (array_length(properties.inboundNatPools) != 0)), 666,
+				type =~ 'microsoft.compute/virtualmachines' and isempty(properties.storageProfile.osDisk.managedDisk), 84,
+				type =~ 'microsoft.network/applicationgateways' and (properties['sslPolicy']['minProtocolVersion'] != 'TLSv1_2' and ​properties['sslPolicy']['minProtocolVersion'] != 'TLSv1_3'​ and properties['sslPolicy']['policyName'] !contains '2022' and properties['sslPolicy']['policyName'] !contains '401S' and properties['defaultPredefinedSslPolicy'] !contains '2022'), 714,
+				type contains 'microsoft.web/sites' and tostring(properties.siteProperties.properties) contains 'LinuxFxVersion' and tostring(properties.siteProperties.properties) contains ('COMPOSE|'), 173,
 				-9999
 			),
 		id, resourceGroup, location, type,  tags = tostring(tags)
@@ -176,7 +180,7 @@ resources
 	| distinct ServiceID, subscriptionId, type, resourceGroup, location, id, tags 
 )
 |union 
-// Query for Classic Redis caches retired	
+// Query for Classic Redis caches retired										  
 (
     AdvisorResources
     | where type =~'microsoft.advisor/recommendations'
@@ -184,20 +188,24 @@ resources
 		or properties.shortDescription contains 'Move to Azure Update Manager as Automation Update Management will be deprecated' 
 		or properties.shortDescription contains 'Upgrade from network security group flow log to Virtual Network flow log'
 		or properties.shortDescription contains 'Upgrade to Transport Layer Security (TLS) 1.2'
+		or properties.shortDescription contains 'Ubuntu 18.04 on Azure Kubernetes Service is being retired'
+		or properties.shortDescription contains 'Ubuntu 20.04 on Azure Kubernetes Service is being retired'
     | project id=tolower(tostring(properties.resourceMetadata.resourceId)), shortDescription = properties.shortDescription
     | join kind = inner
     (
         resources
-        | where type in~ ('microsoft.cache/redis', 'microsoft.automation/automationAccounts', 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS')
-        | extend ServiceID = case 
-			(
-				type contains 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS', 524, 
-				type contains 'microsoft.dbformysql/flexibleservers', 910,
-				-9999
-			)
-        | project ServiceID, subscriptionId, location, type,  id = tolower(id), tags = tostring(tags), resourceGroup
+        | where type in~ ('microsoft.cache/redis', 'microsoft.automation/automationAccounts', 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS', 'microsoft.containerservice/managedclusters')
+        | project subscriptionId, location, type,  id = tolower(id), tags = tostring(tags), resourceGroup
     ) on id
-    | project ServiceID, subscriptionId, type, resourceGroup, location, id, tags  
+	| extend ServiceID = case 
+		(
+			type contains 'MICROSOFT.NETWORK/NETWORKWATCHERS/FLOWLOGS', 524, 
+			type contains 'microsoft.dbformysql/flexibleservers', 910,
+			type contains 'microsoft.containerservice/managedclusters' and shortDescription contains 'Ubuntu 18.04 on Azure Kubernetes Service is being retired', 676,
+			type contains 'microsoft.containerservice/managedclusters' and shortDescription contains 'Ubuntu 20.04 on Azure Kubernetes Service is being retired', 677,
+			-9999
+		)
+    | project ServiceID, subscriptionId, type, resourceGroup, location, id, tags
 )
 | join kind = leftouter ( 
     resourcecontainers 

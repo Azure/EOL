@@ -3,6 +3,7 @@ resources
 	case
 	(
 		type == 'microsoft.containerservice/managedclusters' and properties.networkProfile.networkPlugin == 'kubenet', 657
+		,type =~ 'microsoft.containerservice/managedclusters' and properties.networkProfile.networkPolicy =~ 'azure', 963
 		,type == 'microsoft.compute/cloudservices', 950
 		,type == 'microsoft.containerregistry/registries' and properties['policies']['trustPolicy']['status'] == 'enabled', 600
 		,type == 'microsoft.appplatform/spring', 810
@@ -51,6 +52,7 @@ resources
 			, kind =~ 'MetricsAdvisor', 407
 			, kind =~ 'ContentModerator', 561
 			, kind contains 'LUIS', 160
+			, kind =~ 'HealthInsights', 966
 			, -9999
 		)	   
 		,type contains 'microsoft.compute/virtualmachine' 
@@ -74,8 +76,10 @@ resources
 				or tostring(sku.name) in~ ('Standard_NC6s_v3','Standard_NC12s_v3','Standard_NC24s_v3')), 514
 			,(tostring(properties.hardwareProfile.vmSize) in~ ('Standard_NC24rs_v3')  or tostring(sku.name) in~ ('Standard_NC24rs_v3')), 582
 			,(tostring(properties.hardwareProfile.vmSize) in~ ('Standard_HB60rs','Standard_HB60-45rs','Standard_HB60-30rs','Standard_HB60-15rs') 
-				or tostring(sku.name) in~ ('Standard_HB60rs','Standard_HB60-45rs','Standard_HB60-30rs','Standard_HB60-15rs')), 62,
-			-9999
+				or tostring(sku.name) in~ ('Standard_HB60rs','Standard_HB60-45rs','Standard_HB60-30rs','Standard_HB60-15rs')), 62
+			,(tostring(properties.hardwareProfile.vmSize) in~ ('Standard_NV4as_v4', 'Standard_NV8as_v4', 'Standard_NV16as_v4', 'Standard_NV32as_v4')), 493
+			,(tostring(properties.hardwareProfile.vmSize) in~ ('Standard_NV12s_v3', 'Standard_NV24s_v3', 'Standard_NV24ms_v3', 'Standard_NV32ms_v3', 'Standard_NV48s_v3')), 491
+			, -9999
 		)
 		,type contains 'microsoft.storagecache/caches', 500
 		,type contains 'microsoft.network/virtualnetworkgateways', 
@@ -112,9 +116,15 @@ resources
 		,type contains 'microsoft.compute/virtualmachines' 
 			and properties['hardwareProfile']['vmSize'] startswith 'Standard_DC' 
 			and properties['hardwareProfile']['vmSize'] endswith '_v2', 499
+		,type == 'microsoft.compute/virtualmachines' and (tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Lsv2' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Fsv2' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_GS' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Av2' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_B' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Fs' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_F'), 503
+		,type == 'microsoft.compute/virtualmachines' and (tostring(properties.hardwareProfile.vmSize) startswith 'Standard_G'), 510
 		,type =~ 'microsoft.web/staticsites' and tostring(sku.name) =~ 'Dedicated',15
 		,type =~ 'microsoft.web/kubeenvironments',170
 		,type =~ 'microsoft.databricks/workspaces' and sku.name =~ 'standard',365
+		,type =~ 'microsoft.cognitiveservices/accounts' and kind =~ 'ComputerVision', 483
+		,type =~ 'microsoft.cognitiveservices/accounts' and kind in ('CustomVision.Prediction', 'CustomVision.Training'),261
+		,type contains 'Microsoft.Cache/Redis', 125
+		,type contains 'Microsoft.Cache/redisenterprise' and kind == 'v1', 545
 		,type =~ 'microsoft.compute/virtualmachinescalesets' 
 			and tags contains 'aks-managed', case(tostring(properties.virtualMachineProfile.storageProfile.imageReference.id) contains 'AKSWindows/images/windows-2022', 560
 		,tostring(properties.virtualMachineProfile.storageProfile.imageReference.id) contains 'AKSWindows/images/windows-2019', 284, -9999)
@@ -129,6 +139,7 @@ resources
 			tostring(properties.siteProperties.properties) contains 'DOTNETCORE|9.0', 14,
 			-9999
 		)
+		,type contains 'microsoft.web/sites' and ['kind'] =~ 'functionapp,linux' and properties.sku =~ 'Dynamic', 345
 		,type contains 'microsoft.web/sites' and tostring(properties.siteProperties.properties) contains 'LinuxFxVersion' and ['kind'] contains 'functionapp'
 			,case
 			(

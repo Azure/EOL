@@ -94,7 +94,7 @@ resources
 		,type contains 'microsoft.mixedreality/remoterenderingaccounts', 660
 		,type =~ 'microsoft.cdn/profiles', case(sku contains 'Standard_Microsoft' and kind == 'cdn', 619, -9999)
 		,type =~ 'microsoft.network/applicationgateways' and properties.sku.tier in~ ('Standard','WAF'), 298
-		,type contains 'microsoft.network/applicationgateways' and properties['sku']['tier'] in~ ('WAF_v2') and isnotnull(properties['webApplicationFirewallConfiguration']), 519
+		,type contains 'applicationgateways' and tostring(parse_json(properties)['sku']['tier']) == 'WAF_v2' and tostring(parse_json(properties)['webApplicationFirewallConfiguration']['enabled']) == true and tostring(parse_json(properties)) !contains 'providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies',519
 		,type contains 'microsoft.documentdb/databaseaccounts' and (isempty(properties['minimalTlsVersion']) or properties['minimalTlsVersion'] in ('Tls11', 'Tls')), 703
 		,type contains 'microsoft.eventgrid/' and tostring(properties['minimumTlsVersionAllowed']) in ('1.1', '1.0'), 669
 		,type =~ 'microsoft.sql/servers' and properties['minimalTlsVersion'] in ('None','1.0', '1.1'), 43503

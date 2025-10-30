@@ -520,14 +520,6 @@
     "Availability under Impacted Services": "Yes"
   },
   {
-    "Id": 481,
-    "ServiceName": "VPN Gateway",
-    "RetiringFeature": "Standard and High-Performance SKUs",
-    "RetirementDate": "2025-09-30",
-    "Link": "https://azure.microsoft.com/updates/standard-and-highperformance-vpn-gateway-skus-will-be-retired-on-30-september-2025/",
-    "Availability under Impacted Services": "Yes"
-  },
-  {
     "Id": 514,
     "ServiceName": "Virtual Machines",
     "RetiringFeature": "Standard_NC6s_v3, Standard_NC12s_v3, and Standard_NC24s_v3",
@@ -886,6 +878,14 @@
     "RetirementDate": "2026-03-30",
     "Link": "https://azure.microsoft.com/updates/?id=501528",
     "Availability under Impacted Services": ""
+  },
+  {
+    "Id": 481,
+    "ServiceName": "VPN Gateway",
+    "RetiringFeature": "Standard and High-Performance SKUs",
+    "RetirementDate": "2026-03-31",
+    "Link": "https://azure.microsoft.com/updates/standard-and-highperformance-vpn-gateway-skus-will-be-retired-on-30-september-2025/",
+    "Availability under Impacted Services": "Yes"
   },
   {
     "Id": 84,

@@ -1852,7 +1852,7 @@
     "ServiceName": "Virtual Machines",
     "RetiringFeature": "F, Fs, Fsv2, Lsv2, Gs, Av2, Amv2, and B VM series",
     "RetirementDate": "2028-11-15",
-    "Link": "https://azure.microsoft.com/updates/?id=500294",
+    "Link": "https://azure.microsoft.com/updates/?id=500682",
     "Availability under Impacted Services": "Yes"
   },
   {

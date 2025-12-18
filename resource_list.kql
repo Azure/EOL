@@ -4,6 +4,7 @@ resources
 	(
 		type == 'microsoft.containerservice/managedclusters' and properties.networkProfile.networkPlugin == 'kubenet', 657
 		,type =~ 'microsoft.containerservice/managedclusters' and properties.networkProfile.networkPolicy =~ 'azure', 963
+		,type =~ 'Microsoft.ContainerService/managedClusters' and tostring(parse_json(tolower(properties)).addonprofiles.omsagent.enabled) == 'true' and tostring(parse_json(tolower(properties)).addonprofiles.omsagent.config.useaadauth) != 'true', 202
 		,type == 'microsoft.compute/cloudservices', 950
 		,type == 'microsoft.containerregistry/registries' and properties['policies']['trustPolicy']['status'] == 'enabled', 600
 		,type == 'microsoft.appplatform/spring', 810
@@ -53,6 +54,8 @@ resources
 			, kind =~ 'ContentModerator', 561
 			, kind contains 'LUIS', 160
 			, kind =~ 'HealthInsights', 966
+			, kind =~ 'ComputerVision', 483
+			, kind in ('CustomVision.Prediction', 'CustomVision.Training'), 261
 			, -9999
 		)	   
 		,type contains 'microsoft.compute/virtualmachine' 
@@ -79,6 +82,8 @@ resources
 				or tostring(sku.name) in~ ('Standard_HB60rs','Standard_HB60-45rs','Standard_HB60-30rs','Standard_HB60-15rs')), 62
 			,(tostring(properties.hardwareProfile.vmSize) in~ ('Standard_NV4as_v4', 'Standard_NV8as_v4', 'Standard_NV16as_v4', 'Standard_NV32as_v4')), 493
 			,(tostring(properties.hardwareProfile.vmSize) in~ ('Standard_NV12s_v3', 'Standard_NV24s_v3', 'Standard_NV24ms_v3', 'Standard_NV32ms_v3', 'Standard_NV48s_v3')), 491
+			,(tostring(properties.hardwareProfile.vmSize) startswith 'Standard_DC' and tostring(properties.hardwareProfile.vmSize) endswith '_v2'), 499
+			,(tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Lsv2' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Fsv2' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_GS' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Av2' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_B' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Fs' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_F' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_G'), 503
 			, -9999
 		)
 		,type contains 'microsoft.storagecache/caches', 500
@@ -87,12 +92,12 @@ resources
 		( 
 			(tostring(properties.sku.name) in~ ('Standard','HighPerformance' ) and tostring(properties.gatewayType) contains ('Vpn')), 481
 			,(tostring(properties.vpnClientConfiguration.vpnAuthenticationTypes) contains 'AAD' and tostring(properties.vpnClientConfiguration.aadAudience) == '41b23e61-6c1e-4545-b367-cd054e0ed4b4'), 604
-			,(tostring(parse_json(properties)['sku']['name']) in ('VpnGw1','VpnGw2','VpnGw3','VpnGw4','VpnGw5') and tostring(parse_json(properties)['gatewayType']) contains 'Vpn'), 611,
-			-9999
+			,(tostring(parse_json(properties)['sku']['name']) in ('VpnGw1','VpnGw2','VpnGw3','VpnGw4','VpnGw5') and tostring(parse_json(properties)['gatewayType']) contains 'Vpn'), 611
+			, -9999
 		)
 		,type in~ ('microsoft.labservices/labplans', 'microsoft.labservices/labs', 'microsoft.labservices/labaccounts'), 624
 		,type contains 'microsoft.mixedreality/remoterenderingaccounts', 660
-		,type =~ 'microsoft.cdn/profiles', case(sku contains 'Standard_Microsoft' and kind == 'cdn', 619, -9999)
+		,type =~ 'microsoft.cdn/profiles' and sku contains 'Standard_Microsoft' and kind == 'cdn', 619
 		,type =~ 'microsoft.network/applicationgateways' and properties.sku.tier in~ ('Standard','WAF'), 298
 		,type contains 'applicationgateways' and tostring(parse_json(properties)['sku']['tier']) == 'WAF_v2' and tostring(parse_json(properties)['webApplicationFirewallConfiguration']['enabled']) == true and tostring(parse_json(properties)) !contains 'providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies',519
 		,type contains 'microsoft.documentdb/databaseaccounts' and (isempty(properties['minimalTlsVersion']) or properties['minimalTlsVersion'] in ('Tls11', 'Tls')), 703
@@ -113,16 +118,9 @@ resources
 		,type =~ 'microsoft.insights/alertrules', 200
 		,type contains 'microsoft.media/mediaservices', 394
 		,type =~ 'microsoft.compute/disks' and tostring(parse_json(sku).name) == 'Standard_LRS' and tostring(parse_json(properties).osType) in ('Windows', 'Linux'), 83
-		,type contains 'microsoft.compute/virtualmachines' 
-			and properties['hardwareProfile']['vmSize'] startswith 'Standard_DC' 
-			and properties['hardwareProfile']['vmSize'] endswith '_v2', 499
-		,type == 'microsoft.compute/virtualmachines' and (tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Lsv2' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Fsv2' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_GS' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Av2' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_B' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_Fs' or tostring(properties.hardwareProfile.vmSize) startswith 'Standard_F'), 503
-		,type == 'microsoft.compute/virtualmachines' and (tostring(properties.hardwareProfile.vmSize) startswith 'Standard_G'), 510
 		,type =~ 'microsoft.web/staticsites' and tostring(sku.name) =~ 'Dedicated',15
 		,type =~ 'microsoft.web/kubeenvironments',170
 		,type =~ 'microsoft.databricks/workspaces' and sku.name =~ 'standard',365
-		,type =~ 'microsoft.cognitiveservices/accounts' and kind =~ 'ComputerVision', 483
-		,type =~ 'microsoft.cognitiveservices/accounts' and kind in ('CustomVision.Prediction', 'CustomVision.Training'),261
 		,type contains 'Microsoft.Cache/Redis', 125
 		,type contains 'Microsoft.Cache/redisenterprise' and kind == 'v1', 545
 		,type =~ 'microsoft.compute/virtualmachinescalesets' 
@@ -146,7 +144,7 @@ resources
 				tostring(properties.siteProperties.properties) contains 'PYTHON|3.9',337,
 				-9999
 			)
-			,-9999
+		,-9999
 	)
 | where toint(ServiceID) >0
 | project ServiceID , subscriptionId, type, resourceGroup, location, id, tags = tostring(tags)
